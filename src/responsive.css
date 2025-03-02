@@ -1,0 +1,35 @@
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .navbar-container {
+      flex-direction: column;
+      gap: 15px;
+    }
+    
+    .nav-links {
+      width: 100%;
+      justify-content: space-between;
+    }
+    
+    .nav-search-login {
+      width: 100%;
+      justify-content: space-between;
+    }
+    
+    .footer-container {
+      flex-direction: column;
+      gap: 30px;
+    }
+    
+    .temple-card {
+      flex-direction: column;
+    }
+    
+    .temple-image {
+      width: 100%;
+    }
+    
+    .about-container {
+      flex-direction: column;
+    }
+  }
+  

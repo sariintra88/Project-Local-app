@@ -1,0 +1,89 @@
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* เปลี่ยนจาก 80vh เป็น 100vh */
+     width: 100%;
+  }
+  
+  .login-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .login-logo {
+    margin-bottom: 20px;
+  }
+  
+  .login-logo img {
+    height: 60px;
+  }
+  
+  .login-title {
+    margin-bottom: 30px;
+    font-weight: 500;
+    color: #333;
+  }
+  
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    position: relative;
+  }
+  
+  .form-input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #13294b;
+    color: white;
+  }
+  
+  .form-input::placeholder {
+    color: #ccc;
+  }
+  
+  .password-group {
+    position: relative;
+  }
+  
+  .toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #ccc;
+  }
+  
+  .login-submit-btn {
+    padding: 12px;
+    border: none;
+    border-radius: 25px;
+    background-color: white;
+    color: #333;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .create-account {
+    margin-top: 20px;
+    color: #555;
+  }
+  
+  .create-account-link {
+    color: #333;
+    text-decoration: underline;
+  }
+  

@@ -1,0 +1,182 @@
+.home {
+    width: 100%; /* เปลี่ยนจาก max-width เป็น width 100% */
+    min-height: calc(100vh - 120px); /* ปรับตามความสูง header/footer */
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .hero-section {
+    width: 100%;
+    margin-bottom: 30px;
+  }
+  
+  .hero-image {
+    width: 100%;
+    border-radius: 5px;
+  }
+  
+  .section-title {
+    font-size: 24px;
+    margin-bottom: 30px;
+    color: #333;
+  }
+  
+  .filter-section {
+    display: flex;
+    justify-content: space-between;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 30px;
+  }
+  
+  .rating-filter, .distance-filter {
+    flex: 1;
+  }
+  
+  .rating-filter h3, .distance-filter h3 {
+    margin-bottom: 15px;
+    font-size: 18px;
+  }
+  
+  .rating-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .rating-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .star {
+    color: #ccc;
+    font-size: 20px;
+  }
+  
+  .star.gold {
+    color: gold;
+  }
+  
+  .distance-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .distance-dropdown {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .temples-list {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  .temple-card {
+    display: flex;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .temple-image {
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .temple-info {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  .temple-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  
+  .temple-rating {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background-color: #ff4949;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 15px;
+  }
+  
+  .temple-description, .temple-location, .temple-hours, .temple-gps {
+    margin-bottom: 10px;
+    line-height: 1.6;
+  }
+  
+  .temple-gps a {
+    color: #1a73e8;
+    text-decoration: none;
+  }
+  
+  /* About.css */
+  .about {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .about-container {
+    display: flex;
+    gap: 40px;
+    margin-top: 30px;
+  }
+  
+  .about-images {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .images-row {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .about-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 5px;
+  }
+  
+  .about-content {
+    flex: 1;
+  }
+  
+  .about-title {
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .about-description {
+    line-height: 1.8;
+    color: #555;
+  }
+
+  .page-content {
+    width: 100%;
+    height: 100%;
+  }
