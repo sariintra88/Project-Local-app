@@ -94,5 +94,56 @@ app.get("/api/auth/user", verifyToken, async (req, res) => {
   }
 });
 
+//เพิ่มข้อมูลวัด
+app.post("/api/temples", upload.single("image"), async (req, res) => {
+  try {
+    const { name, description } = req.body;
+    if (!req.file) return res.status(400).json({ error: "กรุณาอัปโหลดรูปภาพ" });
+
+    const newTemple = new Temple({
+      name,
+      image: req.file.filename, // เก็บชื่อไฟล์
+      description,
+    });
+
+    await newTemple.save();
+    res.status(201).json(newTemple);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// ดึงข้อมูลวัดทั้งหมด
+app.get("/api/temples", async (req, res) => {
+  try {
+    const temples = await Temple.find();
+    res.json(temples);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// ดึงข้อมูลวัดตาม ID
+app.get("/api/temples/:id", async (req, res) => {
+  try {
+    const temple = await Temple.findById(req.params.id);
+    if (!temple) return res.status(404).json({ message: "ไม่พบข้อมูล" });
+    res.json(temple);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// ลบข้อมูล
+app.delete("/api/temples/:id", async (req, res) => {
+  try {
+    const temple = await Temple.findByIdAndDelete(req.params.id);
+    if (!temple) return res.status(404).json({ message: "ไม่พบข้อมูล" });
+    res.json({ message: "ลบข้อมูลสำเร็จ" });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // เริ่มเซิร์ฟเวอร์
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
