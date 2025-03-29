@@ -7,6 +7,7 @@ import About from './pages/About';
 import Attractions from './pages/Attractions';
 import Contact from './pages/Contact';
 import Login from './pages/Login';
+import Register from './pages/Register';
 import "./responsive.css";
 import './App.css';
 
@@ -22,6 +23,7 @@ function App() {
             <Route path="/attractions" element={<Attractions />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
           </Routes>
         </main>
         <Footer />
