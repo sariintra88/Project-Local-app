@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Register.css';
 import logo from '../assets/mutelu-logo.png';
 
@@ -10,11 +10,16 @@ function Register() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const navigate = useNavigate();
   
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle registration logic here
     console.log('Registration attempt with:', { email, username, password, confirmPassword });
+    
+    // After successful registration, redirect to login page
+    // In a real application, you would verify the registration was successful first
+    navigate('/login');
   };
   
   return (
