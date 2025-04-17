@@ -10,6 +10,8 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import "./responsive.css";
 import './App.css';
+import TempleDetail from './pages/TempleDetail';
+
 
 function App() {
   return (
@@ -21,6 +23,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/attractions" element={<Attractions />} />
+            <Route path="/attractions/:id" element={<TempleDetail />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />

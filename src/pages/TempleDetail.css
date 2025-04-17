@@ -1,0 +1,189 @@
+.temple-detail {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Gallery */
+.temple-gallery {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 24px;
+  height: 200px;
+  overflow-x: auto;
+}
+
+.gallery-image {
+  flex: 0 0 auto;
+  height: 100%;
+}
+
+.gallery-image img {
+  height: 100%;
+  width: auto;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+/* Header */
+.temple-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+.temple-header h1 {
+  flex: 1;
+  font-size: 28px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  background-color: #ff5a5f;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 4px;
+}
+
+.star {
+  color: #fff;
+  margin-right: 5px;
+}
+
+.rating-value {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+/* Main content area */
+.temple-detail-main {
+  display: flex;
+  gap: 30px;
+}
+
+.temple-description {
+  flex: 3;
+}
+
+.temple-description p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.temple-long-description {
+  margin-top: 30px;
+}
+
+/* Sidebar */
+.temple-info-sidebar {
+  flex: 1;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 15px;
+}
+
+.info-section {
+  margin-bottom: 25px;
+}
+
+.info-section h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.pricing-info, .hours-info {
+  font-size: 14px;
+}
+
+.price-row, .hours-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.location-info {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.location-info p {
+  margin-bottom: 5px;
+}
+
+.gps-link {
+  margin-top: 10px;
+}
+
+.gps-link a {
+  color: #2563eb;
+  text-decoration: none;
+  word-break: break-all;
+}
+
+.gps-link a:hover {
+  text-decoration: underline;
+}
+
+/* Facilities */
+.facilities {
+  margin-top: 20px;
+}
+
+.facility {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.facility-icon {
+  color: #22c55e;
+  background-color: #dcfce7;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+}
+
+.facility-name {
+  font-size: 14px;
+}
+
+/* Back link */
+.back-link {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.back-link a {
+  color: #2563eb;
+  text-decoration: none;
+  display: inline-block;
+  padding: 8px 16px;
+  border: 1px solid #2563eb;
+  border-radius: 4px;
+}
+
+.back-link a:hover {
+  background-color: #2563eb;
+  color: white;
+}
+
+/* Loading and error states */
+.loading, .not-found {
+  text-align: center;
+  padding: 50px;
+  font-size: 18px;
+  color: #666;
+}
