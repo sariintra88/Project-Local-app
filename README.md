@@ -115,15 +115,20 @@ npm install
 npm run dev
  ```
 
-วิดีโอสั้นแสดงการรันระบบ
+# วิดีโอสั้นแสดงการรันระบบ
 
 https://www.loom.com/share/9f2010505a65479591730cb913df7bf9?sid=6adfe924-ff05-4171-a3ec-fb027b16cef2
 
 # บทบาทและความรับผิดชอบของทีม
 Frontend Developer	พัฒนา UI ตามที่ UX/UI Designer ออกแบบ หน้าเว็บด้วย React
+
 Backend Developer	สร้าง API, จัดการฐานข้อมูล
+
 Fullstack Developer	ช่วยเชื่อมต่อ API กับ frontend
-UX/UI Designer	ออกแบบ wireframe, UI หน้าจอต่าง ๆ , 
+
+UX/UI Designer	ออกแบบ wireframe, UI หน้าจอต่าง ๆ
+
 Business Analyst (BA) ค้นหาข้อมูลเกี่ยวกับวัด หารูปภาพ ,ทดสอบการใช้งาน
+
 Project Manager (PM) แบ่งงาน, ตรวจสอบความคืบหน้า, ประสานงานในทีม, เขียนอธิบายโปรเจค
 
