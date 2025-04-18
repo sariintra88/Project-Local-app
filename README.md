@@ -39,32 +39,32 @@
 │    ├── App.css                   # สไตล์หลักของแอป
 │    ├── App.jsx                   # ไฟล์หลักของแอป
 │    ├── index.css                 # สไตล์ Global
-│    ├── main.jsx                  # 
+│    ├── main.jsx                  # เริ่มรันแอป React ลงในหน้าเว็บ
 │    └── responsive.css            # สไตล์เพิ่มเติมสำหรับรองรับหน้าจอหลายขนาด
 │         
-├── .gitignore                     # 
-├── eslint.config.js               # 
-├── index.html                     # 
-├── LICENSE                        # 
-├── package-lock.json              # 
-├── package.json                   # 
-├── README.md                      # เอกสารโปรเจกต์
-├── vite.config.js                 # 
+├── .gitignore                     # ไฟล์ที่ไม่ต้องการให้ Git ติดตาม
+├── eslint.config.js               # ตั้งค่ากฎตรวจสอบโค้ด
+├── index.html                     # สร้างหน้าเว็บ
+├── LICENSE                        # ระบุสิทธิ์การใช้งานของโปรเจกต์
+├── package-lock.json              # ล็อกเวอร์ชัน dependencies ให้ตรงกันทุกเครื่อง
+├── package.json                   # จัดการ dependencies และคำสั่งรันโปรเจกต์
+├── README.md                      # ไฟล์อธิบายโปรเจกต์และวิธีใช้งาน
+├── vite.config.js                 # ตั้งค่าการทำงานของ Vite สำหรับ build เว็บ
 ```
 
 ส่วนของ Back-End
 ```
 
 ├── Backend/temple-api
-    ├── models/                     # 
-    │      ├── Temple.js            # 
-    │      └── User.js              # 
-    ├── uploads/                    # 
+    ├── models/                     
+    │      ├── Temple.js            # มีไว้สำหรับรับข้อมูลวัดจาก postman
+    │      └── User.js              # รับข้อมูลผู้ใช้จาก postman
+    ├── uploads/                    # เก็บรูปภาพที่อัพเดตรูปวัดจาก postman 
     │
-    ├── db.js
-    ├── package-lock.json           #
-    ├── package.json                #
-    └── server.json                 #
+    ├── db.js                       # ไฟล์ database 
+    ├── package-lock.json           
+    ├── package.json                
+    └── server.json                 # API
 
 
 
