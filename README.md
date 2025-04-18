@@ -1,5 +1,7 @@
 
 # เว็บแนะนำวัดในเชียงใหม่
+
+# คำอธิบายโครงสร้างโปรเจกต์
 ส่วนของ Front-End
 ```
 ├── node_modules/                  #
@@ -7,7 +9,7 @@
 ├── public/
 │    ├── images/                   # เก็บไฟล์ภาพที่ใช้ในโปรเจกต์
 │    │
-│    └── vite.svg                  #
+│    └── vite.svg                  
 │
 ├── src/
 │    ├── assets/                   # เก็บไฟล์ภาพที่ใช้ในโปรเจกต์
@@ -34,11 +36,11 @@
 │    │   ├── TempleDetail.jsx      # หน้ารายละเอียดสถานที่แต่ละแห่ง
 │    │   └── TempleDetail.css      # หน้ารายละเอียดสถานที่แต่ละแห่ง
 │    │
-│    ├── App.css                   # 
-│    ├── App.jsx                   # 
-│    ├── index.css                 # 
+│    ├── App.css                   # สไตล์หลักของแอป
+│    ├── App.jsx                   # ไฟล์หลักของแอป
+│    ├── index.css                 # สไตล์ Global
 │    ├── main.jsx                  # 
-│    └── responsive.css            # 
+│    └── responsive.css            # สไตล์เพิ่มเติมสำหรับรองรับหน้าจอหลายขนาด
 │         
 ├── .gitignore                     # 
 ├── eslint.config.js               # 
@@ -48,6 +50,24 @@
 ├── package.json                   # 
 ├── README.md                      # เอกสารโปรเจกต์
 ├── vite.config.js                 # 
+```
+
+ส่วนของ Back-End
+```
+
+├── Backend/temple-api
+    ├── models/                     # 
+    │      ├── Temple.js            # 
+    │      └── User.js              # 
+    ├── uploads/                    # 
+    │
+    ├── db.js
+    ├── package-lock.json           #
+    ├── package.json                #
+    └── server.json                 #
+
+
+
 ```
 
 # วิธีการรันโปรเจกต์
