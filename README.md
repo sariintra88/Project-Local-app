@@ -1,12 +1,140 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# mutelu trip เว็บแนะนำสถานที่ศักดิ์สิทธิ์ในเชียงใหม่
+Mutelu Trip เว็บแอปที่รวบรวมข้อมูลสถานที่ศักดิ์สิทธิ์ในจังหวัดเชียงใหม่ เช่น วัดและศาลเจ้า โดยผู้ใช้สามารถเข้าดูรายละเอียดสถานที่ กดให้เรตติ้ง หรือรีวิว
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# คำอธิบายโครงสร้างโปรเจกต์
+ส่วนของ Front-End
+```
+├── node_modules/                  #
+│
+├── public/
+│    ├── images/                   # เก็บไฟล์ภาพที่ใช้ในโปรเจกต์
+│    │
+│    └── vite.svg                  
+│
+├── src/
+│    ├── assets/                   # เก็บไฟล์ภาพที่ใช้ในโปรเจกต์
+│    │
+│    ├── components/               # ส่วนประกอบที่สามารถนำกลับมาใช้ซ้ำได้
+│    │   ├── Footer.css            # ส่วนท้ายของเว็บไซต์ (footer)
+│    │   ├── Footer.jsx            # ส่วนท้ายของเว็บไซต์ (footer)
+│    │   ├── Navbar.css            # แถบเมนูนำทางด้านบนของเว็บ
+│    │   └── Navbar.jsx            # แถบเมนูนำทางด้านบนของเว็บ
+│    │
+│    ├── pages/                    # หน้าเว็บหลักแต่ละหน้า
+│    │   ├── About.jsx             # เกี่ยวกับเรา
+│    │   ├── About.css             # เกี่ยวกับเรา
+│    │   ├── Attractions.jsx       # หน้ารวมสถานที่ท่องเที่ยวทั้งหมด
+│    │   ├── Attractions.css       # หน้ารวมสถานที่ท่องเที่ยวทั้งหมด
+│    │   ├── Contact.jsx           # หน้าติดต่อเรา
+│    │   ├── Contact.css           # หน้าติดต่อเรา
+│    │   ├── Home.jsx              # หน้าแรก
+│    │   ├── Home.css              # หน้าแรก
+│    │   ├── Login.jsx             # หน้าเข้าสู่ระบบ
+│    │   ├── Login.css             # หน้าเข้าสู่ระบบ
+│    │   ├── Register.jsx          # หน้าสมัครสมาชิก
+│    │   ├── Register.css          # หน้าสมัครสมาชิก
+│    │   ├── TempleDetail.jsx      # หน้ารายละเอียดสถานที่แต่ละแห่ง
+│    │   └── TempleDetail.css      # หน้ารายละเอียดสถานที่แต่ละแห่ง
+│    │
+│    ├── App.css                   # สไตล์หลักของแอป
+│    ├── App.jsx                   # ไฟล์หลักของแอป
+│    ├── index.css                 # สไตล์ Global
+│    ├── main.jsx                  # เริ่มรันแอป React ลงในหน้าเว็บ
+│    └── responsive.css            # สไตล์เพิ่มเติมสำหรับรองรับหน้าจอหลายขนาด
+│         
+├── .gitignore                     # ไฟล์ที่ไม่ต้องการให้ Git ติดตาม
+├── eslint.config.js               # ตั้งค่ากฎตรวจสอบโค้ด
+├── index.html                     # สร้างหน้าเว็บ
+├── LICENSE                        # ระบุสิทธิ์การใช้งานของโปรเจกต์
+├── package-lock.json              # ล็อกเวอร์ชัน dependencies ให้ตรงกันทุกเครื่อง
+├── package.json                   # จัดการ dependencies และคำสั่งรันโปรเจกต์
+├── README.md                      # ไฟล์อธิบายโปรเจกต์และวิธีใช้งาน
+├── vite.config.js                 # ตั้งค่าการทำงานของ Vite สำหรับ build เว็บ
+```
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+ส่วนของ Back-End
+```
+
+├── Backend/temple-api
+    ├── models/                     
+    │      ├── Temple.js            # มีไว้สำหรับรับข้อมูลวัดจาก postman
+    │      └── User.js              # รับข้อมูลผู้ใช้จาก postman
+    ├── uploads/                    # เก็บรูปภาพที่อัพเดตรูปวัดจาก postman 
+    │
+    ├── db.js                       # ไฟล์ database 
+    ├── package-lock.json           
+    ├── package.json                
+    └── server.json                 # API
+
+
+
+```
+
+# สิ่งที่ยังทำไม่ได้ พร้อมแนวคิดว่าจะพัฒนาต่ออย่างไร
+ยังไม่สามารถเชื่อมต่อระบบด้วย Docker เนื่องจากฐานข้อมูลมีปัญหา
+
+แนวคิดพัฒนา: รีบจัดการฐานข้อมูลที่พังให้สำเร็จและเชื่อมต่อระบบ
+
+
+หน้าเขียนรีวิวยังไม่เสร็จ 
+
+แนวคิดพัฒนา: พัฒนา UI สำหรับรีวิว แสดงรีวิวในหน้าแต่ละวัด
+
+
+ยังไม่สามารถกรองวัดตามเรตติ้งได้ 
+
+แนวคิดพัฒนา: เพิ่มระบบให้ผู้ใช้สามารถให้เรตติ้ง และใช้ฟังก์ชัน filter เพื่อแสดงวัดตามคะแนน เช่น 5 ดาว, 4 ดาวขึ้นไป
+
+
+ระบบหลังบ้าน(Admin)
+
+แนวคิดพัฒนา: สร้างหน้า admin สำหรับจัดการสถานที่และผู้ใช้งาน
+
+
+โค้ดส่วนที่ยังพัฒนาไม่สำเร็จและเกิดบัคทำให้ไม่สามารถอัพขึ้นกิตได้
+
+แนวคิดพัฒนา: แก้ไขบัคให้สำเร็จ แต่ถ้าหากยังแก้ไม่ได้จะยังไม่อัพขึ้นกิตเพื่อป้องกันระบบพัง
+
+
+
+
+# docker-compose
+ยังไม่สามารถเชื่อมต่อระบบด้วย Docker เนื่องจากฐานข้อมูลมีปัญหา
+
+
+
+
+# วิธีการรันระบบ เฉพาะในส่วนของ Front-End
+
+Clone โปรเจกต์จาก GitHub
+```
+git clone https://github.com/sariintra88/Project-Local-app.git
+cd Project-Local-app
+ ```
+
+พิมพ์คำสั่ง npm install และ npm run dev ที่ Terminal ใน vs code
+```
+npm install
+npm run dev
+ ```
+
+# วิดีโอสั้นแสดงการรันระบบ
+
+https://www.loom.com/share/9f2010505a65479591730cb913df7bf9?sid=6adfe924-ff05-4171-a3ec-fb027b16cef2
+
+# บทบาทและความรับผิดชอบของทีม
+Frontend Developer	พัฒนา UI ตามที่ UX/UI Designer ออกแบบ หน้าเว็บด้วย React
+
+Backend Developer	สร้าง API, จัดการฐานข้อมูล
+
+Fullstack Developer	ช่วยเชื่อมต่อ API กับ frontend
+
+UX/UI Designer	ออกแบบ wireframe, UI หน้าจอต่าง ๆ
+
+Business Analyst (BA) ค้นหาข้อมูลเกี่ยวกับวัด หารูปภาพ ,ทดสอบการใช้งาน
+
+Project Manager (PM) แบ่งงาน, ตรวจสอบความคืบหน้า, ประสานงานในทีม, เขียนอธิบายโปรเจค
+
