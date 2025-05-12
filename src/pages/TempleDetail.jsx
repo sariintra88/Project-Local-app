@@ -32,7 +32,24 @@ const templesData = [
       '/images/wat3.jpg',
       '/images/wat4.jpg'
     ],
-    rating: 4.8
+    rating: 4.8,
+      reviewImages: [
+    '/images/review1.jpg',
+    '/images/review2.jpg',
+    '/images/review3.jpg'
+    ],
+    reviews: [  
+    {
+      user: 'p*******',
+      comment: 'ไหว้พระขอพรปีใหม่ รู้สึกสงบ สะอาด สวยงามค่ะ',
+      rating: 5
+    },
+    {
+      user: 'j***',
+      comment: 'วัดเก่าแก่ ศิลปะงดงาม และเงียบสงบ',
+      rating: 4
+    }
+  ]
   },
   {
     id: 2,
@@ -59,36 +76,36 @@ const templesData = [
       '/images/doi1.jpg',
       '/images/doi2.jpg'
     ],
-    rating: 4.9
+    rating: 4.9,
+    reviews: [
+      {
+        user: 'k******',
+        comment: 'วิวสวย อากาศดีมาก บันไดขึ้นเยอะแต่คุ้ม!',
+        rating: 5
+      }
+    ]
   }
 ];
+
 
 const TempleDetail = () => {
   const { id } = useParams();
   const [temple, setTemple] = useState(null);
   const [loading, setLoading] = useState(true);
-  
+
   useEffect(() => {
-    // In a real app, you'd fetch this data from an API
-    // For now, we'll just simulate that by finding the temple in our data
     const templeId = parseInt(id);
     const foundTemple = templesData.find(t => t.id === templeId);
-    
     setTemple(foundTemple);
     setLoading(false);
   }, [id]);
-  
-  if (loading) {
-    return <div className="loading">กำลังโหลด...</div>;
-  }
-  
-  if (!temple) {
-    return <div className="not-found">ไม่พบข้อมูลวัด</div>;
-  }
-  
+
+  if (loading) return <div className="loading">กำลังโหลด...</div>;
+  if (!temple) return <div className="not-found">ไม่พบข้อมูลวัด</div>;
+
   return (
     <div className="temple-detail">
-      {/* Gallery header */}
+      {/* แกลเลอรี่ */}
       <div className="temple-gallery">
         {temple.galleryImages.map((img, index) => (
           <div key={index} className="gallery-image">
@@ -96,9 +113,9 @@ const TempleDetail = () => {
           </div>
         ))}
       </div>
-      
+
+      {/* เนื้อหาหลัก */}
       <div className="temple-detail-content">
-        {/* Temple name and rating */}
         <div className="temple-header">
           <h1>{temple.name}</h1>
           <div className="rating">
@@ -106,46 +123,34 @@ const TempleDetail = () => {
             <span className="rating-value">{temple.rating}</span>
           </div>
         </div>
-        
-        {/* Main content area */}
+
         <div className="temple-detail-main">
+          {/* คำอธิบาย */}
           <div className="temple-description">
             <p>{temple.description}</p>
             <div className="temple-long-description">
               <p>{temple.longDescription}</p>
             </div>
           </div>
-          
-          {/* Info sidebar */}
+
+          {/* ข้อมูลเพิ่มเติม */}
           <div className="temple-info-sidebar">
             <div className="info-section">
               <h3>อัตราค่าบริการ</h3>
               <div className="pricing-info">
-                <div className="price-row">
-                  <span>ผู้ใหญ่</span>
-                  <span>{temple.pricing.adult}</span>
-                </div>
-                <div className="price-row">
-                  <span>เด็ก</span>
-                  <span>{temple.pricing.child}</span>
-                </div>
-                <div className="price-row">
-                  <span>ต่างชาติ</span>
-                  <span>{temple.pricing.foreign}</span>
-                </div>
+                <div className="price-row"><span>ผู้ใหญ่</span><span>{temple.pricing.adult}</span></div>
+                <div className="price-row"><span>เด็ก</span><span>{temple.pricing.child}</span></div>
+                <div className="price-row"><span>ต่างชาติ</span><span>{temple.pricing.foreign}</span></div>
               </div>
             </div>
-            
+
             <div className="info-section">
               <h3>เวลาเปิดทำการ</h3>
               <div className="hours-info">
-                <div className="hours-row">
-                  <span>ทุกวัน</span>
-                  <span>{temple.openingHours.weekday}</span>
-                </div>
+                <div className="hours-row"><span>ทุกวัน</span><span>{temple.openingHours.weekday}</span></div>
               </div>
             </div>
-            
+
             <div className="info-section">
               <h3>ที่ตั้ง</h3>
               <div className="location-info">
@@ -154,13 +159,11 @@ const TempleDetail = () => {
                 <p>{temple.location.province}</p>
                 <div className="gps-link">
                   <p>GPS:</p>
-                  <a href={temple.gps} target="_blank" rel="noopener noreferrer">
-                    {temple.gps}
-                  </a>
+                  <a href={temple.gps} target="_blank" rel="noopener noreferrer">{temple.gps}</a>
                 </div>
               </div>
             </div>
-            
+
             {temple.parking && (
               <div className="info-section facilities">
                 <div className="facility">
@@ -171,10 +174,67 @@ const TempleDetail = () => {
             )}
           </div>
         </div>
-      </div>
-      
-      <div className="back-link">
-        <Link to="/attractions">ย้อนกลับไปหน้ารายการวัด</Link>
+
+        {/* 🔻 รีวิว */}
+          <div className="reviews-section">
+            <h2>รีวิวจากผู้เข้าชม</h2>
+
+            {/* Featured Review แบบตัวอย่างที่คุณส่งมา */}
+            <div className="review-card featured-review">
+              <h3 style={{ fontSize: '24px', fontWeight: '700' }}>
+                123 รีวิว <span style={{ fontWeight: 'normal', fontSize: '18px' }}>เรตติ้ง {temple.rating} จาก 5</span>
+              </h3>
+
+              <div className="review-profile" style={{ marginTop: '10px' }}>
+                <div className="avatar-placeholder">👤</div>
+                <div>
+                  <div className="review-user">{temple.reviews[0].user}</div>
+                  <div className="review-stars">{'⭐'.repeat(temple.reviews[0].rating)}</div>
+                </div>
+              </div>
+
+              <h4 style={{ marginTop: '10px', color: '#333' }}>ไหว้พระขอพรปีใหม่</h4>
+              <p className="review-comment">
+                กิจกรรมแนะนำ: ไหว้พระขอพร, ทำบุญ, ถ่ายรูป<br />
+                ระยะเวลาที่ใช้กับสถานที่นี้: 1 - 2 ชั่วโมง<br /><br />
+                ไหว้สิ่งศักดิ์สิทธิ์ ณ วัดพระสิงห์วรมหาวิหารเชียงใหม่ ขอพรเนื่องในโอกาสขึ้นปีใหม่  ไหว้ครูบาศรีวิชัย พระพุทธสิหิงค์ พระศรีสรรเพชร ขอให้ประสบโชคดีในปี 2568 และปีต่อๆไปด้วยเทอญ ปัจจุบัน วัดพระสิงห์ งดการจุดธูปทุกจุดในวัด เพื่อลดฝุ่นPM2.5... <strong>ดูเพิ่มเติม</strong>
+              </p>
+
+              {/* รูปรีวิว 3 ภาพแรก */}
+              <div style={{ display: 'flex', gap: '10px', marginTop: '15px' }}>
+                {temple.reviewImages?.slice(0, 3).map((img, index) => (
+                  <img
+                    key={index}
+                    src={img}
+                    alt={`รูปประกอบรีวิว ${index + 1}`}
+                    style={{ width: '30%', borderRadius: '8px', objectFit: 'cover' }}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* รีวิวทั่วไปอื่น ๆ */}
+            {temple.reviews.map((review, index) => (
+              <div className="review-card" key={index}>
+                <div className="review-header">
+                  <div className="review-profile">
+                    <div className="avatar-placeholder">👤</div>
+                    <div>
+                      <div className="review-user">{review.user}</div>
+                      <div className="review-stars">{'⭐'.repeat(review.rating)}</div>
+                    </div>
+                  </div>
+                </div>
+                <p className="review-comment">{review.comment}</p>
+              </div>
+            ))}
+          </div>
+
+
+        {/* ปุ่มย้อนกลับ */}
+        <div className="back-link">
+          <Link to="/attractions">ย้อนกลับไปหน้ารายการวัด</Link>
+        </div>
       </div>
     </div>
   );

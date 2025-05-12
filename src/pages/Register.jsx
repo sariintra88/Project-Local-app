@@ -13,6 +13,8 @@ const Register = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const [successMessage, setSuccessMessage] = useState('');
+
 
   const validateForm = () => {
     // Basic client-side validation
@@ -62,7 +64,7 @@ const Register = () => {
       // Handle successful registration
       if (response.data.success) {
         // Optional: Show success message
-        alert('ลงทะเบียนสำเร็จ');
+        setSuccessMessage('ลงทะเบียนสำเร็จ');
 
         // Redirect to login page
         navigate('/login');
@@ -186,5 +188,6 @@ const Register = () => {
       </div>
   );
 }
+
 
 export default Register;

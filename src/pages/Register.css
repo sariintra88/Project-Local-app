@@ -86,3 +86,9 @@
     color: #333;
     text-decoration: underline;
   }
+
+  .success-message {
+  color: green;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
