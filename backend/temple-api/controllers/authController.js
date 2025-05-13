@@ -3,7 +3,7 @@ const User = require("../models/User");
 
 const createToken = (user) => {
     return jwt.sign({ id: user._id, username: user.username }, process.env.JWT_SECRET, {
-        expiresIn: "7d",
+        expiresIn: "1d",
     });
 };
 
@@ -26,17 +26,19 @@ exports.register = async (req, res) => {
 
 exports.login = async (req, res) => {
     try {
-        const { email, password } = req.body;
-
-        const user = await User.findOne({ email });
-        if (!user) return res.status(400).json({ error: "Invalid email or password" });
-
-        const isMatch = await user.comparePassword(password);
-        if (!isMatch) return res.status(400).json({ error: "Invalid email or password" });
-
-        const token = createToken(user);
-        res.json({ token, user: { id: user._id, username: user.username } });
+      console.log("🔐 login route hit"); // ดูว่าเข้า route ไหม
+  
+      const { username, password } = req.body;
+      const user = await User.findOne({ username });
+      if (!user) return res.status(400).json({ success: false, message: 'ไม่พบผู้ใช้' });
+  
+      const isMatch = await user.comparePassword(password);
+      if (!isMatch) return res.status(400).json({ success: false, message: 'รหัสผ่านไม่ถูกต้อง' });
+  
+      res.json({ success: true, message: 'เข้าสู่ระบบสำเร็จ' });
     } catch (err) {
-        res.status(500).json({ error: "Login failed" });
+      console.error("💥 login error:", err);
+      res.status(500).json({ success: false, message: 'เกิดข้อผิดพลาดในระบบ' });
     }
-};
+  };
+  

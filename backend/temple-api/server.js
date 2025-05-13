@@ -22,7 +22,7 @@ app.use(express.json());
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 //API Routes
-app.use("/api/auth", authRoutes);
+app.use("/auth", authRoutes);
 app.use("/api/temples", templeRoutes);
 app.use("/api/reviews", reviewRoutes);
 app.use("/api/register", registerRoute);

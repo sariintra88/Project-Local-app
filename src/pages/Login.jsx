@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios'; // ✅ เพิ่ม axios
 import './Login.css';
 import logo from '../assets/mutelu-logo.png';
 
@@ -7,28 +8,43 @@ function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState('');
   const navigate = useNavigate();
-  
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle login logic here
-    console.log('Login attempt with:', { username, password });
-    
-    // After successful login, redirect to home page
-    // In a real application, you would verify the login was successful first
-    navigate('/');
+    setError('');
+
+    try {
+      const response = await axios.post('http://localhost:5001/auth/login', {
+        username,
+        password
+      });
+
+      console.log('Login success:', response.data);
+      // บันทึก token ถ้ามี (optional)
+      localStorage.setItem('token', response.data.token);
+
+      // ไปหน้า Home
+      navigate('/');
+    } catch (err) {
+      console.error('Login error:', err.response?.data || err.message);
+      setError(err.response?.data?.message || 'Login failed');
+    }
   };
-  
+
   return (
     <div className="login-page">
       <div className="login-container">
         <div className="login-logo">
           <img src={logo} alt="MUTELU TRIP" />
         </div>
-        
+
         <h2 className="login-title">Sign in to continue</h2>
-        
+
         <form className="login-form" onSubmit={handleSubmit}>
+          {error && <p className="error-message">{error}</p>} {/* ✅ แสดงข้อความผิดพลาด */}
+
           <div className="form-group">
             <input
               type="text"
@@ -39,7 +55,7 @@ function Login() {
               required
             />
           </div>
-          
+
           <div className="form-group password-group">
             <input
               type={showPassword ? "text" : "password"}
@@ -49,7 +65,7 @@ function Login() {
               onChange={(e) => setPassword(e.target.value)}
               required
             />
-            <button 
+            <button
               type="button"
               className="toggle-password"
               onClick={() => setShowPassword(!showPassword)}
@@ -57,12 +73,12 @@ function Login() {
               {showPassword ? "👁️" : "👁️‍🗨️"}
             </button>
           </div>
-          
+
           <button type="submit" className="login-submit-btn">
             LOGIN
           </button>
         </form>
-        
+
         <p className="create-account">
           don't have an account?
           <Link to="/register" className="create-account-link"> create a new account</Link>
