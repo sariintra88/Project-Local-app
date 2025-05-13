@@ -15,6 +15,7 @@ const authRoutes = require("./routes/auth");
 const templeRoutes = require("./routes/temples");
 const reviewRoutes = require("./routes/reviews");
 
+
 //Middleware
 app.use(cors());
 app.use(express.json());

@@ -11,18 +11,24 @@ exports.register = async (req, res) => {
     try {
         const { username, email, password } = req.body;
 
+        // ตรวจสอบว่าอีเมลมีอยู่แล้วหรือไม่
         const existing = await User.findOne({ email });
         if (existing) return res.status(400).json({ error: "Email already exists" });
 
+        // สร้างผู้ใช้ใหม่
         const user = new User({ username, email, password });
         await user.save();
 
+        // สร้าง Token
         const token = createToken(user);
         res.status(201).json({ token, user: { id: user._id, username: user.username } });
     } catch (err) {
-        res.status(500).json({ error: "Registration failed" });
+        // เพิ่มการ log ข้อผิดพลาด
+        console.error("Registration error:", err);
+        res.status(500).json({ error: "Registration failed", message: err.message });
     }
 };
+
 
 exports.login = async (req, res) => {
     try {

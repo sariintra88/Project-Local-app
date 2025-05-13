@@ -47,7 +47,7 @@ const Register = () => {
 
     try {
       // Replace with your actual backend API endpoint
-      const response = await axios.post('http://localhost:5001/api/register', {
+      const response = await axios.post('http://localhost:5001/auth/register', {
         email,
         username,
         password,
