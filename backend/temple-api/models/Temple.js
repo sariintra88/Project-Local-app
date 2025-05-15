@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const templeSchema = new mongoose.Schema({
   name: String,
-  image: String,
+  image: { type: String, default: "" },
   description: String,
 });
 

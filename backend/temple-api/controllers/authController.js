@@ -32,7 +32,7 @@ exports.register = async (req, res) => {
 
 exports.login = async (req, res) => {
     try {
-      console.log("🔐 login route hit"); // ดูว่าเข้า route ไหม
+      console.log("🔐 login route hit");
   
       const { username, password } = req.body;
       const user = await User.findOne({ username });
@@ -41,10 +41,20 @@ exports.login = async (req, res) => {
       const isMatch = await user.comparePassword(password);
       if (!isMatch) return res.status(400).json({ success: false, message: 'รหัสผ่านไม่ถูกต้อง' });
   
-      res.json({ success: true, message: 'เข้าสู่ระบบสำเร็จ' });
+      const token = createToken(user); // ✅ สร้าง token
+      res.json({
+        success: true,
+        message: 'เข้าสู่ระบบสำเร็จ',
+        token,
+        user: {
+          id: user._id,
+          username: user.username
+        }
+      });
     } catch (err) {
       console.error("💥 login error:", err);
       res.status(500).json({ success: false, message: 'เกิดข้อผิดพลาดในระบบ' });
     }
   };
+  
   
