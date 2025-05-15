@@ -1,35 +1,19 @@
 const express = require("express");
-const Review = require("../models/Review");
+const multer = require("multer");
 const verifyToken = require("../middleware/verifyToken");
-const User = require("../models/User");
+const { createReview, getReviewsByTemple } = require("../controllers/reviewController");
+
 const router = express.Router();
 
-router.post("/:templeId", verifyToken, async (req, res) => {
-  try {
-    const { comment, rating } = req.body;
-    const user = await User.findById(req.user.userId);
-
-    const newReview = new Review({
-      templeId: req.params.templeId,
-      userId: user._id,
-      username: user.username,
-      comment,
-      rating,
-    });
-    await newReview.save();
-    res.status(201).json(newReview);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
+const storage = multer.diskStorage({
+  destination: "uploads/",
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + "-" + file.originalname);
+  },
 });
+const upload = multer({ storage });
 
-router.get("/:templeId", async (req, res) => {
-  try {
-    const reviews = await Review.find({ templeId: req.params.templeId });
-    res.json(reviews);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
+router.post("/:templeId", verifyToken, upload.array("images", 5), createReview);
+router.get("/:templeId", getReviewsByTemple);
 
 module.exports = router;

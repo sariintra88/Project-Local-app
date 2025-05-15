@@ -1,31 +1,30 @@
-require("dotenv").config(); //โหลดตัวแปรจาก .env
+require("dotenv").config(); // โหลดตัวแปรจาก .env
 
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
-const mongoose = require("mongoose"); //เพิ่มกรณีใช้ mongoose.connect ใน db.js
+const mongoose = require("mongoose");
 
 const app = express();
 
-//เชื่อมต่อ MongoDB (ควรอยู่ใน db.js แยกต่างหาก)
+// เชื่อมต่อ MongoDB (ควรแยกไป db.js หากต้องการแยก concerns)
 require("./db");
 
-//เรียก routes
+// เรียกใช้งาน routes
 const authRoutes = require("./routes/auth");
 const templeRoutes = require("./routes/temples");
 const reviewRoutes = require("./routes/reviews");
 
-
-//Middleware
+// Middleware
 app.use(cors());
 app.use(express.json());
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-//API Routes
+// Routes
 app.use("/auth", authRoutes);
 app.use("/api/temples", templeRoutes);
 app.use("/api/reviews", reviewRoutes);
 
-//Start Server
+// Start server
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
