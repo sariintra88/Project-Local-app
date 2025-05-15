@@ -1,9 +1,48 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 import logo from '../assets/mutelu-logo.png';
 
 function Navbar() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [username, setUsername] = useState('');
+  const navigate = useNavigate();
+  
+  // Check login status on component mount and when localStorage changes
+  useEffect(() => {
+    checkLoginStatus();
+    
+    // Listen for storage events (in case user logs in/out in another tab)
+    window.addEventListener('storage', checkLoginStatus);
+    return () => window.removeEventListener('storage', checkLoginStatus);
+  }, []);
+  
+  const checkLoginStatus = () => {
+    const token = localStorage.getItem('token');
+    const savedUsername = localStorage.getItem('username');
+    
+    if (token && savedUsername) {
+      setIsLoggedIn(true);
+      setUsername(savedUsername);
+    } else {
+      setIsLoggedIn(false);
+      setUsername('');
+    }
+  };
+  
+  const handleLogout = () => {
+    // Clear stored data
+    localStorage.removeItem('token');
+    localStorage.removeItem('username');
+    
+    // Update state
+    setIsLoggedIn(false);
+    setUsername('');
+    
+    // Optionally navigate to home page
+    navigate('/');
+  };
+
   return (
     <nav className="navbar">
       <div className="navbar-container">
@@ -30,9 +69,18 @@ function Navbar() {
             </button>
           </div>
           
-          <Link to="/login" className="login-button">
-            Login
-          </Link>
+          {isLoggedIn ? (
+            <div className="user-container">
+              <span className="username">{username}</span>
+              <button onClick={handleLogout} className="logout-button">
+                Logout
+              </button>
+            </div>
+          ) : (
+            <Link to="/login" className="login-button">
+              Login
+            </Link>
+          )}
         </div>
       </div>
     </nav>
