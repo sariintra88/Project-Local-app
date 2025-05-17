@@ -6,7 +6,7 @@ const reviewSchema = new mongoose.Schema({
   username: { type: String, required: true },
   comment: { type: String },
   rating: { type: Number, required: true, min: 1, max: 5 },
-  images: [String], // เก็บชื่อไฟล์รูปภาพ
+  images: { type: [String], default: [] },
   createdAt: { type: Date, default: Date.now },
 });
 

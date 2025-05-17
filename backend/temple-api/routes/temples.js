@@ -15,6 +15,7 @@ const upload = multer({ storage });
 
 router.post("/", verifyToken, upload.single("image"), templeController.createTemple);
 router.get("/", templeController.getAllTemples);
+router.get("/search", templeController.searchTemplesByName);
 router.get("/:id", templeController.getTempleById);
 router.delete("/:id", verifyToken, templeController.deleteTemple);
 

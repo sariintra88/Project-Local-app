@@ -43,3 +43,17 @@ exports.deleteTemple = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+exports.searchTemplesByName = async (req, res) => {
+  try {
+    const { q } = req.query;
+    if (!q) return res.status(400).json({ message: "Missing search query" });
+
+    const regex = new RegExp(q, "i");
+    const temples = await Temple.find({ name: { $regex: regex } });
+
+    res.json(temples);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
