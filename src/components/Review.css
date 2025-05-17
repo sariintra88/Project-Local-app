@@ -1,0 +1,137 @@
+.review-section {
+  margin-bottom: 20px;
+}
+
+.review-section label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.button-group button {
+  border: 1px solid #ccc;
+  background: white;
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.button-group button:hover {
+  border-color: #2563eb;
+  color: #2563eb;
+}
+
+button.outline {
+  border: 1px dashed #2563eb;
+  background: #f0f8ff;
+  color: #2563eb;
+}
+
+.review-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+.review-buttons .primary {
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 20px;
+}
+
+.review-buttons .cancel {
+  background-color: #e5e7eb;
+  color: black;
+  border-radius: 6px;
+  padding: 10px 20px;
+}
+
+/* ⭐ ระบบให้ดาวแบบใหญ่และ responsive */
+.rating-stars {
+  font-size: 250px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin: 16px 0;
+}
+
+.rating-stars .star {
+  font-size: 45px;
+  cursor: pointer;
+  color: rgb(226, 224, 224); 
+  transition: transform 0.2s ease, color 0.2s ease, -webkit-text-stroke 0.2s ease;
+  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.1));
+}
+.rating-stars .star.selected {
+  color: #ffc107;
+  -webkit-text-stroke: 1.5px #ffc107;
+  transform: scale(1.15);
+}
+
+.rating-stars .star:hover {
+  transform: scale(1);
+  color: #ffc107;
+}
+
+@media (max-width: 500px) {
+  .rating-stars {
+    font-size: 60px;
+  }
+}
+
+/* ✅ Modal Pop-up */
+.review-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; 
+}
+
+.review-modal {
+  background: #fff;
+  border-radius: 12px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-sizing: border-box;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+/* ✅ ช่อง input */
+.review-modal input,
+.review-modal textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 1rem;
+  box-sizing: border-box;
+  background-color: #f9f9f9;
+  resize: none;
+}
+
+/* ✅ ให้ scroll ลื่นและไม่ overflow */
+body.modal-open {
+  overflow: hidden;
+}

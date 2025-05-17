@@ -1,0 +1,83 @@
+// src/components/CustomNavbar.jsx
+import React, { useState, useEffect } from 'react';
+import './MuteluTrip.css';
+import logo from '../assets/mutelu-logo.png';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
+import Footer from './Footer';
+
+const CustomNavbar = ({ onNavClick = null, activeSection }) => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [username, setUsername] = useState('');
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    const savedUsername = localStorage.getItem('username');
+    if (token && savedUsername) {
+      setIsLoggedIn(true);
+      setUsername(savedUsername);
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('username');
+    setIsLoggedIn(false);
+    setUsername('');
+  };
+
+  return (
+    <nav className="navbar">
+      <div className="navbar-container">
+        <div className="navbar-logo">
+            <img src={logo} alt="MUTELU TRIP" className="logo" />
+        </div>
+
+        <div className="nav-links">
+          {isHomePage ? (
+            <>
+              {['home', 'about', 'attractions', 'contact'].map(section => (
+                <a
+                  key={section}
+                  className={`nav-item ${activeSection === section ? 'active' : ''}`}
+                  onClick={() => onNavClick?.(section)}
+                >
+                  {section === 'home' ? 'หน้าแรก' :
+                   section === 'about' ? 'เกี่ยวกับเรา' :
+                   section === 'attractions' ? 'สถานที่ท่องเที่ยว' :
+                   'ติดต่อเรา'}
+                </a>
+              ))}
+            </>
+          ) : (
+            <>
+                <Link to="/home" className={`nav-item ${location.pathname === '/home' ? 'active' : ''}`}>หน้าแรก</Link>
+                <Link to="/about" className={`nav-item ${location.pathname === '/about' ? 'active' : ''}`}>เกี่ยวกับเรา</Link>
+                <Link to="/attractions" className={`nav-item ${location.pathname === '/attractions' ? 'active' : ''}`}>สถานที่ท่องเที่ยว</Link>
+                <Link to="/contact" className={`nav-item ${location.pathname === '/contact' ? 'active' : ''}`}>ติดต่อเรา</Link>
+            </>
+          )}
+        </div>
+
+        <div className="nav-search-login">
+          <div className="search-container">
+            <input type="text" className="search-input" placeholder="พิมพ์สถานที่ท่องเที่ยว" />
+            <button className="search-button"><i className="search-icon">🔍</i></button>
+          </div>
+
+          {isLoggedIn ? (
+            <div className="user-container">
+              <span className="username">{username}</span>
+              <button onClick={handleLogout} className="logout-button">Logout</button>
+            </div>
+          ) : (
+            <Link to="/login" className="login-button">Login</Link>
+          )}
+        </div>
+      </div>
+    </nav>
+  );
+};
+
+export default CustomNavbar;
