@@ -1,88 +1,194 @@
 .login-page {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh; /* เปลี่ยนจาก 80vh เป็น 100vh */
-     width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* เปลี่ยนจาก 80vh เป็น 100vh */
+  width: 100%;
+}
+
+.login-container {
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+  text-align: center;
+}
+
+.login-logo {
+  margin-bottom: 20px;
+}
+
+.login-logo img {
+  height: 60px;
+}
+
+.login-title {
+  margin-bottom: 30px;
+  font-weight: 500;
+  color: #333;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  position: relative;
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #13294b;
+  color: white;
+}
+
+.form-input::placeholder {
+  color: #ccc;
+}
+
+.password-group {
+  position: relative;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #ccc;
+}
+
+.login-submit-btn {
+  padding: 12px;
+  border: none;
+  border-radius: 25px;
+  background-color: white;
+  color: #333;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.create-account {
+  margin-top: 20px;
+  color: #555;
+}
+
+.create-account-link {
+  color: #333;
+  text-decoration: underline;
+}
+
+/* CSS สำหรับ Popup การแจ้งเตือนเข้าสู่ระบบสำเร็จ */
+.success-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.success-popup-content {
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  width: 90%;
+  max-width: 320px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.success-icon {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  background-color: #13294b;
+  color: white;
+  border-radius: 50%;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.success-message {
+  color: #555;
+  font-size: 16px;
+  margin-top: 5px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
   }
-  
-  .login-container {
-    width: 100%;
-    max-width: 400px;
-    padding: 20px;
-    text-align: center;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  .login-logo {
-    margin-bottom: 20px;
-  }
-  
-  .login-logo img {
-    height: 60px;
-  }
-  
-  .login-title {
-    margin-bottom: 30px;
-    font-weight: 500;
-    color: #333;
-  }
-  
-  .login-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-bottom: 20px;
-  }
-  
-  .form-group {
-    position: relative;
-  }
-  
-  .form-input {
-    width: 100%;
-    padding: 12px 15px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #13294b;
-    color: white;
-  }
-  
-  .form-input::placeholder {
-    color: #ccc;
-  }
-  
-  .password-group {
-    position: relative;
-  }
-  
-  .toggle-password {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #ccc;
-  }
-  
-  .login-submit-btn {
-    padding: 12px;
-    border: none;
-    border-radius: 25px;
-    background-color: white;
-    color: #333;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 10px;
-  }
-  
-  .create-account {
-    margin-top: 20px;
-    color: #555;
-  }
-  
-  .create-account-link {
-    color: #333;
-    text-decoration: underline;
-  }
+}
+
+/* CSS สำหรับ popup ทั่วไปที่มีอยู่แล้ว */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-container {
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  width: 90%;
+  max-width: 320px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.popup-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.popup-content p {
+  color: #333;
+  font-size: 18px;
+  margin: 0;
+}
+
+.popup-content button {
+  padding: 10px 25px;
+  border: none;
+  border-radius: 25px;
+  background-color: #13294b;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.popup-content button:hover {
+  background-color: #0c1c33;
+}
