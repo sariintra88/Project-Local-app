@@ -6,7 +6,7 @@ const { createReview, getReviewsByTemple } = require("../controllers/reviewContr
 const router = express.Router();
 
 const storage = multer.diskStorage({
-  destination: "uploads/",
+  destination: "uploads/review",
   filename: (req, file, cb) => {
     cb(null, Date.now() + "-" + file.originalname);
   },
