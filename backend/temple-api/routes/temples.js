@@ -6,7 +6,7 @@ const templeController = require("../controllers/templeController");
 const router = express.Router();
 
 const storage = multer.diskStorage({
-  destination: "uploads/",
+  destination: "uploads/1-temple/",
   filename: (req, file, cb) => {
     cb(null, Date.now() + "-" + file.originalname);
   },

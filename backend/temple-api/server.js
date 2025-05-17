@@ -14,6 +14,7 @@ require("./db");
 const authRoutes = require("./routes/auth");
 const templeRoutes = require("./routes/temples");
 const reviewRoutes = require("./routes/reviews");
+const templeInfoRoutes = require("./routes/templeInfo");
 
 // Middleware
 app.use(cors());
@@ -24,6 +25,7 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/auth", authRoutes);
 app.use("/api/temples", templeRoutes);
 app.use("/api/reviews", reviewRoutes);
+app.use("/api/temple-info", templeInfoRoutes);
 
 // Start server
 const PORT = process.env.PORT || 5001;
