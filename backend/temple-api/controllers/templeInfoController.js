@@ -2,50 +2,43 @@ const TempleInfo = require("../models/TempleInfo");
 
 exports.createTempleInfo = async (req, res) => {
   try {
-    const {
-      name, description, feeAdult, feeChild, feeForeign,
-      openDays, openTime, location
-    } = req.body;
-
+    const { name, description, feeAdult, feeChild, feeForeigner, openDays, openTime, location } = req.body;
     const images = req.files ? req.files.map(file => file.filename) : [];
 
-    const newTemple = new TempleInfo({
-      name, description, feeAdult, feeChild, feeForeign,
-      openDays, openTime, location, images
+    const newTempleInfo = new TempleInfo({
+      name,
+      images,
+      description,
+      feeAdult,
+      feeChild,
+      feeForeigner,
+      openDays,
+      openTime,
+      location,
     });
 
-    await newTemple.save();
-    res.status(201).json(newTemple);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
+    await newTempleInfo.save();
+    res.status(201).json(newTempleInfo);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 };
 
-exports.getAllTempleInfo = async (req, res) => {
+exports.getAllTempleInfos = async (req, res) => {
   try {
-    const temples = await TempleInfo.find();
-    res.json(temples);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
+    const templeInfos = await TempleInfo.find();
+    res.json(templeInfos);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 };
 
 exports.getTempleInfoById = async (req, res) => {
   try {
-    const temple = await TempleInfo.findById(req.params.id);
-    if (!temple) return res.status(404).json({ message: "Temple not found" });
-    res.json(temple);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-};
-
-exports.deleteTempleInfo = async (req, res) => {
-  try {
-    const temple = await TempleInfo.findByIdAndDelete(req.params.id);
-    if (!temple) return res.status(404).json({ message: "Temple not found" });
-    res.json({ message: "Temple deleted" });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
+    const templeInfo = await TempleInfo.findById(req.params.id);
+    if (!templeInfo) return res.status(404).json({ message: "TempleInfo not found" });
+    res.json(templeInfo);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 };
