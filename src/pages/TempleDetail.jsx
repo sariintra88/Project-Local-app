@@ -1,113 +1,63 @@
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
+
+const API_BASE_URL = 'http://localhost:5001';
+
 const TempleDetail = () => {
-  const { id } = useParams();
-  const [temple, setTemple] = useState(null);
+  const { name } = useParams();
+  const [templeInfo, setTempleInfo] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [activeButton, setActiveButton] = useState(null);
-  const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
-  const navigate = useNavigate();
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const templeId = parseInt(id);
-    const foundTemple = templesData.find(t => t.id === templeId);
-    setTemple(foundTemple);
-    setLoading(false);
-  }, [id]);
+    const fetchTempleInfo = async () => {
+      try {
+        setLoading(true);
+        const decodedName = decodeURIComponent(name);
+        const res = await axios.get(`${API_BASE_URL}/api/templeInfos/name/${decodedName}`);
+        setTempleInfo(res.data);
+        setError(null);
+      } catch (err) {
+        console.error("ไม่พบ templeInfo:", err);
+        setError("ไม่สามารถโหลดข้อมูลวัดได้");
+        setTempleInfo(null);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  if (loading) return <div className="loading">กำลังโหลด.</div>;
-  if (!temple) return <div className="not-found">ไม่พบข้อมูลวัด</div>;
+    fetchTempleInfo();
+  }, [name]);
+
+  if (loading) return <div>กำลังโหลดข้อมูล...</div>;
+  if (error) return <div className="error">{error}</div>;
+  if (!templeInfo) return <div>ไม่พบข้อมูลวัดนี้</div>;
 
   return (
-    <>
-      <div className="temple-detail">
-        {/* แกลเลอรี่ */}
-        <div className="temple-gallery">
-          {temple.galleryImages.map((img, index) => (
-            <div key={index} className="gallery-image">
-              <img src={img} alt={`${temple.name} - รูปที่ ${index + 1}`} />
-            </div>
+    <div className="temple-detail">
+      <h1>{templeInfo.name}</h1>
+      <p>{templeInfo.description}</p>
+      <p>วันเปิด: {templeInfo.openDays}</p>
+      <p>เวลาเปิด: {templeInfo.openTime}</p>
+      <p>ค่าผู้ใหญ่: {templeInfo.feeAdult}</p>
+      <p>ค่าเด็ก: {templeInfo.feeChild}</p>
+      <p>ที่ตั้ง: {templeInfo.location}</p>
+
+      {templeInfo.images && Array.isArray(templeInfo.images) && (
+        <div className="temple-images">
+          <h3>รูปภาพเพิ่มเติม</h3>
+          {templeInfo.images.map((img, index) => (
+            <img
+              key={index}
+              src={`${API_BASE_URL}/uploads/5-temple/${img}`}
+              alt={`ภาพวัด ${templeInfo.name} - ${index + 1}`}
+              style={{ maxWidth: "300px", margin: "10px" }}
+            />
           ))}
         </div>
-
-        {/* รายละเอียด */}
-        <div className="temple-detail-content">
-          <div className="temple-header">
-            <h1>{temple.name}</h1>
-            <div className="rating">
-              <span className="star">⭐</span>
-              <span className="rating-value">{temple.rating}</span>
-            </div>
-          </div>
-
-          <div className="temple-detail-main">
-            <div className="temple-description">
-              <p>{temple.description}</p>
-              <div className="main-temple-image">
-                <img src={temple.mainImage} alt={temple.name} />
-              </div>
-              <div className="temple-long-description">
-                <p>{temple.longDescription}</p>
-              </div>
-            </div>
-
-            <div className="temple-info-sidebar">
-              <div className="info-section">
-                <h3>อัตราค่าบริการ</h3>
-                <div className="pricing-info">
-                  <div className="price-row"><span>ผู้ใหญ่</span><span>{temple.pricing.adult}</span></div>
-                  <div className="price-row"><span>เด็ก</span><span>{temple.pricing.child}</span></div>
-                  <div className="price-row"><span>ต่างชาติ</span><span>{temple.pricing.foreign}</span></div>
-                </div>
-              </div>
-
-              <div className="info-section">
-                <h3>เวลาเปิดทำการ</h3>
-                <div className="hours-info">
-                  <div className="hours-row"><span>ทุกวัน</span><span>{temple.openingHours.weekday}</span></div>
-                </div>
-              </div>
-
-              <div className="info-section">
-                <h3>ที่ตั้ง</h3>
-                <div className="location-info">
-                  <p>{temple.location.address}</p>
-                  <p>{temple.location.district}</p>
-                  <p>{temple.location.province}</p>
-                  <div className="gps-link">
-                    <a href={temple.gps} target="_blank" rel="noopener noreferrer">{temple.gps}</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* รีวิว */}
-          <div className="temple-reviews">
-            {temple.reviews.map((review, index) => (
-              <div className="review-card" key={index}>
-                <div className="review-header">
-                  <div className="review-profile">
-                    <div className="avatar-placeholder">👤</div>
-                    <div>
-                      <div className="review-user">{review.user}</div>
-                      <div className="review-stars">{'⭐'.repeat(review.rating)}</div>
-                    </div>
-                  </div>
-                </div>
-                <p className="review-comment">{review.comment}</p>
-              </div>
-            ))}
-          </div>
-
-          {/* ปุ่มย้อนกลับ */}
-          <div className="back-link">
-            <Link to="/attractions">ย้อนกลับไปหน้ารายการวัด</Link>
-          </div>
-
-          {/* โมดัลรีวิว */}
-          {isReviewModalOpen && <Review isOpen={true} onClose={() => setIsReviewModalOpen(false)} />}
-        </div>
-      </div>
-    </>
+      )}
+    </div>
   );
 };
 

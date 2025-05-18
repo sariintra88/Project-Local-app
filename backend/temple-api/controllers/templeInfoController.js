@@ -42,3 +42,18 @@ exports.getTempleInfoById = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+exports.getTempleInfoByName = async (req, res) => {
+  try {
+    const name = decodeURIComponent(req.params.name);
+    const info = await TempleInfo.findOne({ name });
+
+    if (!info) {
+      return res.status(404).json({ message: 'ไม่พบข้อมูล' });
+    }
+
+    res.json(info);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
