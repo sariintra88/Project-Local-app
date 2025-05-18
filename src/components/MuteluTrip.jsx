@@ -1,3 +1,4 @@
+// src/components/MuteluTrip.jsx
 import React, { useRef, useState, useEffect } from 'react';
 import Home from '../pages/Home';
 import About from '../pages/About';
@@ -39,15 +40,15 @@ function MuteluTrip({ isDetailPage }) {
           }
         });
       },
-      { threshold: 0.3 }
+      { threshold: 0.15 }
     );
 
-    Object.entries(sectionRefs).forEach(([key, ref]) => {
+    Object.values(sectionRefs).forEach((ref) => {
       if (ref.current) observer.observe(ref.current);
     });
 
     return () => {
-      Object.entries(sectionRefs).forEach(([key, ref]) => {
+      Object.values(sectionRefs).forEach((ref) => {
         if (ref.current) observer.unobserve(ref.current);
       });
     };
@@ -59,10 +60,10 @@ function MuteluTrip({ isDetailPage }) {
 
       {!isDetailPage ? (
         <>
-          <section id="home" ref={homeRef}><Home /></section>
-          <section id="about" ref={aboutRef}><About /></section>
-          <section id="attractions" ref={attractionsRef}><Attractions /></section>
-          <section id="contact" ref={contactRef}><Contact /></section>
+          <section id="home" ref={homeRef} className="section"><Home /></section>
+          <section id="about" ref={aboutRef} className="section"><About /></section>
+          <section id="attractions" ref={attractionsRef} className="section"><Attractions /></section>
+          <section id="contact" ref={contactRef} className="section"><Contact /></section>
           <Footer />
         </>
       ) : (

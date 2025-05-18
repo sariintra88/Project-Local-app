@@ -58,7 +58,6 @@ function Login() {
             <div className="success-popup">
               <div className="success-popup-content">
                 <div className="success-icon">✓</div>
-                <p>Login successful!</p>
                 <p className="success-message">เข้าสู่ระบบสำเร็จ {username}! ✅</p>
               </div>
             </div>

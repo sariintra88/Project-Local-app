@@ -7,7 +7,7 @@
   
   .hero-section {
     width: 100%;
-    margin-top: 50px; /* ดันภาพไม่ให้โดนซ้อน */
+    /* margin-top: 5px; ดันภาพไม่ให้โดนซ้อน */
     margin-bottom: 30px;
   }
   
