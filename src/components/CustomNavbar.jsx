@@ -8,6 +8,7 @@ const CustomNavbar = ({ onNavClick = null, activeSection }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState('');
   const location = useLocation();
+  const navigate = useNavigate(); // ✅ เพิ่ม
   const isHomePage = location.pathname === '/';
 
   useEffect(() => {
@@ -24,6 +25,8 @@ const CustomNavbar = ({ onNavClick = null, activeSection }) => {
     localStorage.removeItem('username');
     setIsLoggedIn(false);
     setUsername('');
+    navigate('/login'); // ✅ เด้งกลับหน้า login
+    window.location.reload(); // ✅ รีโหลดเพื่อเคลียร์ state อื่น ๆ
   };
 
   return (
@@ -53,28 +56,26 @@ const CustomNavbar = ({ onNavClick = null, activeSection }) => {
             </>
           ) : (
             <>
-                <Link to="/home" className={`nav-item ${location.pathname === '/home' ? 'active' : ''}`}>หน้าแรก</Link>
-                <Link to="/about" className={`nav-item ${location.pathname === '/about' ? 'active' : ''}`}>เกี่ยวกับเรา</Link>
-                <Link to="/attractions" className={`nav-item ${location.pathname === '/attractions' ? 'active' : ''}`}>สถานที่ท่องเที่ยว</Link>
-                <Link to="/contact" className={`nav-item ${location.pathname === '/contact' ? 'active' : ''}`}>ติดต่อเรา</Link>
+              <Link to="/home" className={`nav-item ${location.pathname === '/home' ? 'active' : ''}`}>หน้าแรก</Link>
+              <Link to="/about" className={`nav-item ${location.pathname === '/about' ? 'active' : ''}`}>เกี่ยวกับเรา</Link>
+              <Link to="/attractions" className={`nav-item ${location.pathname === '/attractions' ? 'active' : ''}`}>สถานที่ท่องเที่ยว</Link>
+              <Link to="/contact" className={`nav-item ${location.pathname === '/contact' ? 'active' : ''}`}>ติดต่อเรา</Link>
             </>
           )}
         </div>
 
-          {isLoggedIn ? (
-              <div className="user-control">
-                  <div className="user-display">
-                    <span className="user-icon">👤</span>
-                    <span className="username">{username}</span>
-                  </div>
-                  <button onClick={handleLogout} className="logout-button">ลงชื่อออก</button>
-                </div>
-
-            ) : (
-              <Link to="/login" className="login-button">เข้าสู่ระบบ</Link>
-            )}
-
-        </div>
+        {isLoggedIn ? (
+          <div className="user-control">
+            <div className="user-display">
+              <span className="user-icon">👤</span>
+              <span className="username">{username}</span>
+            </div>
+            <button onClick={handleLogout} className="logout-button">ลงชื่อออก</button>
+          </div>
+        ) : (
+          <Link to="/login" className="login-button">เข้าสู่ระบบ</Link>
+        )}
+      </div>
     </nav>
   );
 };
