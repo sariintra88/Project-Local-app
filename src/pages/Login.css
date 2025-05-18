@@ -43,13 +43,15 @@
   padding: 12px 15px;
   border: 1px solid #ddd;
   border-radius: 5px;
-  background-color: #13294b;
-  color: white;
+  background-color: white; 
+  color: #333;             
 }
 
 .form-input::placeholder {
-  color: #ccc;
+  color: #555;
 }
+
+
 
 .password-group {
   position: relative;
@@ -192,3 +194,15 @@
 .popup-content button:hover {
   background-color: #0c1c33;
 }
+
+input.form-input,
+textarea.form-input {
+  color: #333 !important;
+}
+
+.form-input:focus {
+  outline: none;
+  border: 2px solid #2e5780; /* เปลี่ยนสีได้ตามต้องการ เช่น น้ำเงิน */
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25); /* เสริมความชัด */
+}
+

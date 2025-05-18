@@ -69,7 +69,7 @@ function Login() {
             <img src={logo} alt="MUTELU TRIP" />
           </div>
 
-          <h2 className="login-title">Sign in to continue</h2>
+          <h2 className="login-title">ลงทะเบียนเข้าสู่ระบบ</h2>
 
           <form className="login-form" onSubmit={handleSubmit}>
             {error && <p className="error-message">{error}</p>}
@@ -78,7 +78,7 @@ function Login() {
               <input
                   type="text"
                   className="form-input"
-                  placeholder="username"
+                  placeholder="ชื่อผู้ใช้"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   required
@@ -89,7 +89,7 @@ function Login() {
               <input
                   type={showPassword ? "text" : "password"}
                   className="form-input"
-                  placeholder="password"
+                  placeholder="รหัสผ่าน"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
@@ -104,13 +104,13 @@ function Login() {
             </div>
 
             <button type="submit" className="login-submit-btn">
-              LOGIN
+              ล็อกอิน
             </button>
           </form>
 
           <p className="create-account">
-            don't have an account?
-            <Link to="/register" className="create-account-link"> create a new account</Link>
+            ยังไม่มีบัญชีผู้ใช้?
+            <Link to="/register" className="create-account-link"> สร้างบัญชีผู้ใช้ใหม่ที่นี่</Link>
           </p>
         </div>
       </div>

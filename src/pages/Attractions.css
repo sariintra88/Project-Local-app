@@ -169,3 +169,47 @@
   .temple-info a:hover {
     text-decoration: underline;
   }
+
+.rating-option .star {
+  color: #ddd;
+  transition: color 0.2s, transform 0.2s;
+}
+
+.rating-option.selected .star {
+  color: #ffb700; /* เหลืองเมื่อเลือก */
+  transform: scale(1.2);
+}
+
+.rating-option.selected {
+  font-weight: bold;
+}
+
+
+
+.star.gold {
+  color: #ffb700; /* สีทองเมื่อเลือก */
+  transform: scale(1.1);
+}
+
+
+.rating-option.selected {
+  font-weight: bold;
+}
+
+.star {
+  font-size: 20px;
+  color: white; /* พื้นขาว */
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.star.selected {
+  color: #ffb700; /* สีเหลืองเมื่อถูกเลือก */
+  -webkit-text-stroke: 0px; /* เอาขอบออกเมื่อเลือก */
+  transform: scale(1.2);
+}
+
+.rating-option:hover .star {
+  color: #ffd700;
+  transform: scale(1.1);
+}
+

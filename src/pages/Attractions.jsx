@@ -110,22 +110,20 @@ function Attractions() {
             <div className="filter-sidebar">
               <h3>เรตติ้ง</h3>
               <div className="rating-filters">
-                <div className="rating-option" onClick={() => setFilterRating(5.0)}>
-                  <span className="star">⭐</span> 5.0
-                </div>
-                <div className="rating-option" onClick={() => setFilterRating(4.0)}>
-                  <span className="star gold">⭐</span> 4.0 +
-                </div>
-                <div className="rating-option" onClick={() => setFilterRating(3.0)}>
-                  <span className="star">⭐</span> 3.0 +
-                </div>
-                <div className="rating-option" onClick={() => setFilterRating(2.0)}>
-                  <span className="star">⭐</span> 2.0 +
-                </div>
-                <div className="rating-option" onClick={() => setFilterRating(1.0)}>
-                  <span className="star">⭐</span> 1.0 +
-                </div>
+                {[5, 4, 3, 2, 1].map(rating => (
+                  <div
+                    key={rating}
+                    className={`rating-option ${filterRating === rating ? 'selected' : ''}`}
+                    onClick={() => setFilterRating(rating)}
+                  >
+                    <span className={`star ${filterRating === rating ? 'selected' : ''}`}>
+                        ★
+                      </span>
+                    {rating}.0{rating !== 5 ? ' +' : ''}
+                  </div>
+                ))}
               </div>
+
 
             </div>
 
@@ -136,7 +134,7 @@ function Attractions() {
                       <div key={temple._id} className="temple-listing">
                         <div className="temple-image">
                           <img
-                              src={temple.image ? `${API_BASE_URL}/uploads/${temple.image}` : '/images/temple-default.jpg'}
+                              src={temple.image ? `${API_BASE_URL}/uploads/1-temple/${temple.image}` : '/images/temple-default.jpg'}
                               alt={temple.name}
                           />
                         </div>

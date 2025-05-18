@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import './MuteluTrip.css';
 import logo from '../assets/mutelu-logo.png';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
-import Footer from './Footer';
 
 const CustomNavbar = ({ onNavClick = null, activeSection }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -31,7 +30,9 @@ const CustomNavbar = ({ onNavClick = null, activeSection }) => {
     <nav className="navbar">
       <div className="navbar-container">
         <div className="navbar-logo">
+          <Link to="/">
             <img src={logo} alt="MUTELU TRIP" className="logo" />
+          </Link>
         </div>
 
         <div className="nav-links">
@@ -67,13 +68,18 @@ const CustomNavbar = ({ onNavClick = null, activeSection }) => {
           </div>
 
           {isLoggedIn ? (
-            <div className="user-container">
-              <span className="username">{username}</span>
-              <button onClick={handleLogout} className="logout-button">Logout</button>
-            </div>
-          ) : (
-            <Link to="/login" className="login-button">Login</Link>
-          )}
+              <div className="user-control">
+                  <div className="user-display">
+                    <span className="user-icon">👤</span>
+                    <span className="username">{username}</span>
+                  </div>
+                  <button onClick={handleLogout} className="logout-button">Logout</button>
+                </div>
+
+            ) : (
+              <Link to="/login" className="login-button">Login</Link>
+            )}
+
         </div>
       </div>
     </nav>

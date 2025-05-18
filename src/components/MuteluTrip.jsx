@@ -10,6 +10,7 @@ import './MuteluTrip.css';
 
 function MuteluTrip({ isDetailPage }) {
   const [activeSection, setActiveSection] = useState('home');
+
   const homeRef = useRef(null);
   const aboutRef = useRef(null);
   const attractionsRef = useRef(null);
@@ -41,13 +42,13 @@ function MuteluTrip({ isDetailPage }) {
       { threshold: 0.5 }
     );
 
-    Object.values(sectionRefs).forEach((ref) => {
-      if (ref?.current) observer.observe(ref.current);
+    Object.entries(sectionRefs).forEach(([key, ref]) => {
+      if (ref.current) observer.observe(ref.current);
     });
 
     return () => {
-      Object.values(sectionRefs).forEach((ref) => {
-        if (ref?.current) observer.unobserve(ref.current);
+      Object.entries(sectionRefs).forEach(([key, ref]) => {
+        if (ref.current) observer.unobserve(ref.current);
       });
     };
   }, []);
@@ -62,11 +63,10 @@ function MuteluTrip({ isDetailPage }) {
           <section id="about" ref={aboutRef}><About /></section>
           <section id="attractions" ref={attractionsRef}><Attractions /></section>
           <section id="contact" ref={contactRef}><Contact /></section>
+          <Footer />
         </>
       ) : (
-        <>
-          <TempleDetail />
-        </>
+        <TempleDetail />
       )}
     </div>
   );
