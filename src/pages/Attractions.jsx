@@ -136,7 +136,7 @@ function Attractions() {
                       <div key={temple._id} className="temple-listing">
                         <div className="temple-image">
                           <img
-                              src={temple.image ? `${API_BASE_URL}/uploads/${temple.image}` : '/images/temple-default.jpg'}
+                              src={temple.image ? `${API_BASE_URL}/uploads/1-temple/${temple.image}` : '/images/temple-default.jpg'}
                               alt={temple.name}
                           />
                         </div>
