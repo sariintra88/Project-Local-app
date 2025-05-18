@@ -73,11 +73,11 @@ const CustomNavbar = ({ onNavClick = null, activeSection }) => {
                     <span className="user-icon">👤</span>
                     <span className="username">{username}</span>
                   </div>
-                  <button onClick={handleLogout} className="logout-button">Logout</button>
+                  <button onClick={handleLogout} className="logout-button">ลงชื่อออก</button>
                 </div>
 
             ) : (
-              <Link to="/login" className="login-button">Login</Link>
+              <Link to="/login" className="login-button">เข้าสู่ระบบ</Link>
             )}
 
         </div>

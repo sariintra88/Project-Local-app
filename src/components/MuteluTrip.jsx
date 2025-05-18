@@ -39,7 +39,7 @@ function MuteluTrip({ isDetailPage }) {
           }
         });
       },
-      { threshold: 0.5 }
+      { threshold: 0.3 }
     );
 
     Object.entries(sectionRefs).forEach(([key, ref]) => {
