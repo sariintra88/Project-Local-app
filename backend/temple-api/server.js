@@ -47,7 +47,7 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/auth", authRoutes);
 app.use("/api/temples", templeRoutes);
 app.use("/api/reviews", reviewRoutes);
-app.use("/api/templeInfos", templeInfoRoutes);
+app.use("/api/templeinfos", templeInfoRoutes);
 
 // Middleware จัดการ error
 app.use((err, req, res, next) => {

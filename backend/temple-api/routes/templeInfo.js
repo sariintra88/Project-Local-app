@@ -38,6 +38,7 @@ router.get('/name/:name', async (req, res) => {
 
 // ดึงข้อมูลโดยใช้ id (ObjectId)
 router.get("/:id", templeInfoController.getTempleInfoById);
+router.get("/name/:name", templeInfoController.getTempleInfoByName);
 
 module.exports = router;
 
