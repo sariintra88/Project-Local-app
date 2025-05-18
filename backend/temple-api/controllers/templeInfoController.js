@@ -2,10 +2,11 @@ const TempleInfo = require("../models/TempleInfo");
 
 exports.createTempleInfo = async (req, res) => {
   try {
-    const { name, description, feeAdult, feeChild, feeForeigner, openDays, openTime, location } = req.body;
+    const { id,name, description, feeAdult, feeChild, feeForeigner, openDays, openTime, location } = req.body;
     const images = req.files ? req.files.map(file => file.filename) : [];
 
     const newTempleInfo = new TempleInfo({
+      id,
       name,
       images,
       description,
@@ -45,15 +46,15 @@ exports.getTempleInfoById = async (req, res) => {
 
 exports.getTempleInfoByName = async (req, res) => {
   try {
-    const name = decodeURIComponent(req.params.name);
-    const info = await TempleInfo.findOne({ name });
-
-    if (!info) {
-      return res.status(404).json({ message: 'ไม่พบข้อมูล' });
+    const name = req.params.name;
+    // ค้นหาแบบตรงตัว
+    const templeInfo = await TempleInfo.findOne({ name: name });
+    if (!templeInfo) {
+      return res.status(404).json({ message: "ไม่พบข้อมูลวัดนี้" });
     }
-
-    res.json(info);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.json(templeInfo);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
 };
+

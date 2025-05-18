@@ -1,8 +1,8 @@
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
 import axios from "axios";
 
-const API_BASE_URL = 'http://localhost:5001';
+const API_BASE_URL = "http://localhost:5001";
 
 const TempleDetail = () => {
   const { name } = useParams();
@@ -14,13 +14,11 @@ const TempleDetail = () => {
     const fetchTempleInfo = async () => {
       try {
         setLoading(true);
-        const decodedName = decodeURIComponent(name);
-        const res = await axios.get(`${API_BASE_URL}/api/templeInfos/name/${decodedName}`);
+        const res = await axios.get(`${API_BASE_URL}/api/templeinfos/name/${name}`);
         setTempleInfo(res.data);
         setError(null);
       } catch (err) {
-        console.error("ไม่พบ templeInfo:", err);
-        setError("ไม่สามารถโหลดข้อมูลวัดได้");
+        setError("ไม่พบข้อมูลวัดนี้");
         setTempleInfo(null);
       } finally {
         setLoading(false);
@@ -31,28 +29,29 @@ const TempleDetail = () => {
   }, [name]);
 
   if (loading) return <div>กำลังโหลดข้อมูล...</div>;
-  if (error) return <div className="error">{error}</div>;
+  if (error) return <div>{error}</div>;
   if (!templeInfo) return <div>ไม่พบข้อมูลวัดนี้</div>;
 
   return (
-    <div className="temple-detail">
+    <div>
       <h1>{templeInfo.name}</h1>
       <p>{templeInfo.description}</p>
       <p>วันเปิด: {templeInfo.openDays}</p>
       <p>เวลาเปิด: {templeInfo.openTime}</p>
       <p>ค่าผู้ใหญ่: {templeInfo.feeAdult}</p>
       <p>ค่าเด็ก: {templeInfo.feeChild}</p>
+      <p>ค่าต่างชาติ: {templeInfo.feeForeigner}</p>
       <p>ที่ตั้ง: {templeInfo.location}</p>
 
-      {templeInfo.images && Array.isArray(templeInfo.images) && (
-        <div className="temple-images">
-          <h3>รูปภาพเพิ่มเติม</h3>
-          {templeInfo.images.map((img, index) => (
+      {templeInfo.images && templeInfo.images.length > 0 && (
+        <div>
+          <h3>รูปภาพ</h3>
+          {templeInfo.images.map((img, i) => (
             <img
-              key={index}
+              key={i}
               src={`${API_BASE_URL}/uploads/5-temple/${img}`}
-              alt={`ภาพวัด ${templeInfo.name} - ${index + 1}`}
-              style={{ maxWidth: "300px", margin: "10px" }}
+              alt={`รูปภาพวัด ${templeInfo.name} ${i + 1}`}
+              style={{ maxWidth: 300, margin: 10 }}
             />
           ))}
         </div>

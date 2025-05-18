@@ -17,6 +17,6 @@ const upload = multer({ storage });
 router.post("/", verifyToken, upload.array("images", 5), templeInfoController.createTempleInfo);
 router.get("/", templeInfoController.getAllTempleInfos);
 router.get("/:id", templeInfoController.getTempleInfoById);
-router.get("/name/:name", templeInfoController.getTempleInfoByName); // ✅ FIXED
+router.get("/name/:name", templeInfoController.getTempleInfoByName);
 
 module.exports = router;
