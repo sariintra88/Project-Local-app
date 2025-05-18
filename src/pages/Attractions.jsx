@@ -13,31 +13,32 @@ function Attractions() {
   const [searchLocation, setSearchLocation] = useState('');
   const [debouncedSearch, setDebouncedSearch] = useState('');
 
-  // ✅ debounce ค่าที่พิมพ์ โดยรอ 500ms ก่อนอัปเดต
+  // ✅ debounce การพิมพ์
   useEffect(() => {
-    const handler = setTimeout(() => {
+    const delay = setTimeout(() => {
       setDebouncedSearch(searchLocation);
-    }, 500); // รอ 0.5 วินาทีหลังพิมพ์เสร็จ
+    }, 700); // เพิ่มดีเลให้ลื่นขึ้น
 
-    return () => {
-      clearTimeout(handler);
-    };
+    return () => clearTimeout(delay);
   }, [searchLocation]);
 
-  // 🔍 โหลดข้อมูล (ทั้งหมด หรือแบบค้นหา)
   const fetchTemples = useCallback(async () => {
     try {
-      setLoading(true);
+      // ตั้ง loading แบบ delay นิดหน่อย
+      const showLoading = setTimeout(() => setLoading(true), 300);
+
       const endpoint = debouncedSearch.trim()
           ? `${API_BASE_URL}/api/temples/search?q=${debouncedSearch}`
           : `${API_BASE_URL}/api/temples`;
+
       const response = await axios.get(endpoint);
       setTemples(Array.isArray(response.data) ? response.data : []);
       setError(null);
+
+      clearTimeout(showLoading);
+      setLoading(false);
     } catch (err) {
-      console.error("โหลดข้อมูลผิดพลาด:", err);
       setError("ไม่สามารถโหลดข้อมูลได้ กรุณาลองใหม่");
-    } finally {
       setLoading(false);
     }
   }, [debouncedSearch]);
@@ -63,7 +64,6 @@ function Attractions() {
                 onChange={(e) => setSearchLocation(e.target.value)}
                 placeholder="ค้นหาชื่อวัด..."
             />
-            {/* ปุ่มยังคงอยู่ เผื่ออยากใช้ */}
             <button onClick={fetchTemples}>ค้นหา</button>
           </div>
 
@@ -92,11 +92,11 @@ function Attractions() {
 
             {/* 📜 รายการวัด */}
             <div className="temple-listings">
-              {loading ? (
-                  <div className="loading">กำลังโหลดข้อมูล...</div>
-              ) : error ? (
+              {loading && <div className="loading">กำลังโหลดข้อมูล...</div>}
+
+              {!loading && error ? (
                   <div className="error">{error}</div>
-              ) : filteredTemples.length === 0 ? (
+              ) : !loading && filteredTemples.length === 0 ? (
                   <div className="no-results">ไม่พบข้อมูลวัดที่ค้นหา</div>
               ) : (
                   filteredTemples.map((temple) => (
