@@ -17,15 +17,6 @@ function Footer() {
           </p>
         </div>
         
-        <div className="footer-links-section">
-          <h3>Links</h3>
-          <ul className="footer-links">
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/about">About us</Link></li>
-            <li><Link to="/attractions">Attractions</Link></li>
-            <li><Link to="/contact">Contact us</Link></li>
-          </ul>
-        </div>
         
         <div className="footer-contact-section">
           <h3>Contact</h3>

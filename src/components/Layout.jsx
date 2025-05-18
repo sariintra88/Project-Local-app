@@ -1,4 +1,3 @@
-import React from 'react';
 import CustomNavbar from './CustomNavbar';
 import Footer from './Footer';
 

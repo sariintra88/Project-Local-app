@@ -110,7 +110,7 @@ function Login() {
 
           <p className="create-account">
             ยังไม่มีบัญชีผู้ใช้?
-            <Link to="/register" className="create-account-link"> สร้างบัญชีผู้ใช้ใหม่ที่นี่</Link>
+            <Link to="/register" className="create-account-link"> สร้างบัญชีใหม่ที่นี่</Link>
           </p>
         </div>
       </div>
