@@ -272,8 +272,6 @@
   margin: 20px 0;
 }
 
-
-
 .action-btn {
   display: flex;
   align-items: center;
@@ -367,4 +365,9 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
+}
+.action-btn:focus,
+.action-btn:active {
+  outline: none;
+  box-shadow: none;
 }

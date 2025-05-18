@@ -57,15 +57,19 @@ function Attractions() {
           <h1 className="attractions-title">สถานที่ท่องเที่ยวสำหรับสายบุญ ในจังหวัดเชียงใหม่</h1>
 
           {/* 🔍 ช่องค้นหา */}
-          <div className="search-bar">
-            <input
+          <div className="search-container">
+              <input
                 type="text"
+                className="search-input"
                 value={searchLocation}
                 onChange={(e) => setSearchLocation(e.target.value)}
                 placeholder="ค้นหาชื่อวัด..."
-            />
-            <button onClick={fetchTemples}>ค้นหา</button>
-          </div>
+              />
+              <button className="search-button" onClick={fetchTemples}>
+                <i className="search-icon">🔍</i>
+              </button>
+            </div>
+
 
           <div className="attractions-content">
             {/* 🔽 Sidebar filter */}

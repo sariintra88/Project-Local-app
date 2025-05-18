@@ -256,3 +256,33 @@
   font-size: 1.2rem;
   margin: 20px 0;
 }
+.attractions .search-container {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto 24px auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* ✅ ให้ไอคอนไปอยู่ขวาสุด */
+  border: 1px solid #ccc;
+  border-radius: 30px;
+  padding: 4px 12px;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s ease;
+}
+
+.attractions .search-container:focus-within {
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.3);
+}
+.temple-listing {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: white;
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+}
+
+.temple-listing:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}

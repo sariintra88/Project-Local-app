@@ -61,12 +61,6 @@ const CustomNavbar = ({ onNavClick = null, activeSection }) => {
           )}
         </div>
 
-        <div className="nav-search-login">
-          <div className="search-container">
-            <input type="text" className="search-input" placeholder="พิมพ์สถานที่ท่องเที่ยว" />
-            <button className="search-button"><i className="search-icon">🔍</i></button>
-          </div>
-
           {isLoggedIn ? (
               <div className="user-control">
                   <div className="user-display">
@@ -81,7 +75,6 @@ const CustomNavbar = ({ onNavClick = null, activeSection }) => {
             )}
 
         </div>
-      </div>
     </nav>
   );
 };
