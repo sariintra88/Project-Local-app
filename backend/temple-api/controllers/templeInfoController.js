@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const TempleInfo = require("../models/TempleInfo");
 
 exports.createTempleInfo = async (req, res) => {
@@ -35,8 +36,16 @@ exports.getAllTempleInfos = async (req, res) => {
 
 exports.getTempleInfoById = async (req, res) => {
   try {
-    const templeInfo = await TempleInfo.findById(req.params.id);
+    const id = req.params.id;
+
+    // เช็คว่า id ที่ส่งมาเป็น ObjectId ถูกต้องหรือไม่
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ message: "Invalid TempleInfo ID" });
+    }
+
+    const templeInfo = await TempleInfo.findById(id);
     if (!templeInfo) return res.status(404).json({ message: "TempleInfo not found" });
+
     res.json(templeInfo);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -46,7 +55,7 @@ exports.getTempleInfoById = async (req, res) => {
 exports.getTempleInfoByName = async (req, res) => {
   try {
     const name = decodeURIComponent(req.params.name);
-    const info = await TempleInfo.findOne({ name });
+    const info = await TempleInfo.findOne({ name: { $regex: new RegExp(name, 'i') } });
 
     if (!info) {
       return res.status(404).json({ message: 'ไม่พบข้อมูล' });
@@ -57,3 +66,4 @@ exports.getTempleInfoByName = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
+
