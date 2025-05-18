@@ -7,7 +7,7 @@ const mongoose = require("mongoose");
 
 const app = express();
 
-// เชื่อมต่อ MongoDB (ควรแยกไป db.js หากต้องการแยก concerns)
+// เชื่อมต่อ MongoDB
 require("./db");
 
 // เรียกใช้งาน routes
@@ -25,8 +25,9 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/auth", authRoutes);
 app.use("/api/temples", templeRoutes);
 app.use("/api/reviews", reviewRoutes);
-app.use("/api/temple-info", templeInfoRoutes);
+app.use("/api/templeInfos", templeInfoRoutes);
 
-// Start server
+// ✅ ลบ get ซ้ำออก
+
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
